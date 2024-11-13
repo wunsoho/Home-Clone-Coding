@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'TitleJW'; /* 사용할 폰트의 이름을 정의 */
+  src: url('./fonts/CookieRun\ Regular.ttf'); /* 폰트 파일의 위치 */
+}
+@font-face {
+  font-family: 'MenuJW'; /* 사용할 폰트의 이름을 정의 */
+  src: url('./fonts/Paperlogy-7Bold.ttf'); /* 폰트 파일의 위치 */
+}
