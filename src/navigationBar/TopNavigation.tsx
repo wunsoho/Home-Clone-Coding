@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { NavState } from './NavProvider';
+import { NavState } from './NavState';
 import { NavContext  } from './NavProvider';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Title, MenuBotton, SearchInput, 
@@ -16,7 +16,7 @@ function TopNavigation() {
     const [btnActive, setBtnActive] = useState<NavState>(currentNav);
 
     useEffect(() => {
-        const navState = pathToNavMap[location.pathname] || "community";
+        const navState = pathToNavMap[location.pathname] || NavState.COMMUNITY;
         setBtnActive(navState as NavState);
         setNav(navState as NavState);
     }, [location, setNav]);
@@ -24,6 +24,7 @@ function TopNavigation() {
     const toggleActive = (name: NavState) => {
         setBtnActive(name);
         setNav(name);
+        navigate(pathToNavMap[name]);
     }
 
     const handleMouseEnter = (name: NavState) => {
@@ -34,41 +35,48 @@ function TopNavigation() {
         setNav(btnActive); 
     }
 
+    const CommuSubMenu = [
+        NavState.COMMUNITY,
+        NavState.RECOMMAND,
+        NavState.CHANNEL,
+        // 추가적인 상태들을 이 배열에 포함
+    ];
+
     return (
         <div>
             <Title>
                 <img src={Logo} className="Home" alt="홈" onClick={() => { navigate('/'); }}></img>
                 <MenuContainer>
                     <MenuBotton
-                        isActive={btnActive === "community"}
+                        isActive={CommuSubMenu.includes(btnActive)}
                         onClick={() => {
-                        toggleActive("community");
+                        toggleActive(NavState.COMMUNITY);
                         navigate('/');
                         }}
-                        onMouseEnter={() => handleMouseEnter("community")}
+                        onMouseEnter={() => handleMouseEnter(NavState.COMMUNITY)}
                         onMouseLeave={handleMouseLeave}
                     >
                         커뮤니티
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === "shopping"}
+                        isActive={btnActive === NavState.SHOPPING}
                         onClick={() => {
-                        toggleActive("shopping");
+                        toggleActive(NavState.SHOPPING);
                         navigate('/shopping');
                         }}
-                        onMouseEnter={() => handleMouseEnter("shopping")}
+                        onMouseEnter={() => handleMouseEnter(NavState.SHOPPING)}
                         onMouseLeave={handleMouseLeave}
                     >
                         쇼핑
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === "life"}
+                        isActive={btnActive === NavState.LIFE}
                         isLifeButton={true}
                         onClick={() => {
-                        toggleActive("life");
+                        toggleActive(NavState.LIFE);
                         navigate('/life');
                         }}
-                        onMouseEnter={() => handleMouseEnter("life")}
+                        onMouseEnter={() => handleMouseEnter(NavState.LIFE)}
                         onMouseLeave={handleMouseLeave}
                     >
                         인테리어/생활

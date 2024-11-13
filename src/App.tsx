@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavProvider from "./navigationBar/NavProvider";
 import Navbar from './navigationBar/Navbar';
 import TopNavigation from './navigationBar/TopNavigation';
-import { Community, Life, Shopping } from "./pages";
+import { Community, Life, Shopping, Recommand, Channel } from "./pages";
 import './App.css';
 
 function App() {
@@ -15,6 +15,8 @@ function App() {
           <Route path="/" element={<Community/>}/>
           <Route path="/shopping" element={<Shopping/>}/>
           <Route path="/life" element={<Life/>}/>
+          <Route path="/topics/recommend" element={<Recommand/>}/>
+          <Route path="/topics/hashtag-channel" element={<Channel/>}/>
         </Routes>
       </Router>
     </NavProvider>

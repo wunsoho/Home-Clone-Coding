@@ -1,7 +1,5 @@
 import React, { createContext, useState } from "react";
-
-// 네비게이션 상태 타입 정의
-export type NavState = "community" | "shopping" | "life";
+import { NavState } from './NavState';
 
 // Context 타입 정의
 interface NavContextType {
@@ -10,12 +8,12 @@ interface NavContextType {
 }
 
 export const NavContext = createContext<NavContextType>({
-  currentNav: "community",
+  currentNav: NavState.COMMUNITY,
   setNav: () => {},
 });
 
 const NavProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currentNav, setNav] = useState<NavState>("community");
+  const [currentNav, setNav] = useState<NavState>(NavState.COMMUNITY);
 
   return (
     <NavContext.Provider value={{ currentNav, setNav }}>

@@ -2,14 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { NavContext } from "../navigationBar/NavProvider";
 import { NavState } from '../navigationBar/NavState';
 
-const Life = () => {
+const Channel = () => {
   const { setNav } = useContext(NavContext);
 
   useEffect(() => {
-    setNav(NavState.LIFE);
+    setNav(NavState.CHANNEL);
   }, [setNav]);
 
-  return <div>인테리어/생활 페이지</div>;
+  return <div>#채널 페이지</div>;
 };
 
-export default Life;
+export default Channel;

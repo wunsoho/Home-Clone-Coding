@@ -1,7 +1,9 @@
-import { NavState } from './navigationBar/NavProvider';
+import { NavState } from './navigationBar/NavState';
 
 export const pathToNavMap: Record<string, NavState> = {
-    "/": "community",
-    "/shopping": "shopping",
-    "/life": "life",
+    "/": NavState.COMMUNITY,
+    "/shopping": NavState.SHOPPING,
+    "/life": NavState.LIFE,
+    "/topics/recommend": NavState.RECOMMAND,
+    "/topics/hashtag-channel": NavState.CHANNEL
 };
