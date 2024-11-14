@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Title = styled.div`
-    margin-top : 2vh;
+    margin-top : 2.2vh;
     display: flex;
     align-items: center;
     justify-content : center;
@@ -61,13 +61,13 @@ export const SearchInput = styled.input`
         text-indent: 2.3vw;
     }
     &:focus {
-        border-color: skyblue; /* 포커스 상태에서 테두리 색상: 하늘색 */
+        border-color: skyblue; 
     }
 `;
 
 export const LoginContainer = styled.div`
     display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
+    align-items: center; 
     margin-left : 1vw;
 `
 
@@ -102,8 +102,8 @@ export const WriteButton = styled.button`
     border: none;
     border-radius : 0.2vw;
     display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; 
+    justify-content: center; 
 
     .Down {
         margin-top : 0.1vh;

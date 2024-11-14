@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { NavContext } from "../navigationBar/NavProvider";
-import { NavState } from '../navigationBar/NavState';
+import { NavContext } from "../../navigationBar/NavProvider";
+import { NavState } from '../../navigationBar/NavState';
 
 const Home = () => {
   const { setNav } = useContext(NavContext);

@@ -1,25 +1,26 @@
 import React, { useContext } from "react";
 import CommuMenu from "./NavMenu/CommuMenu";
+import ShoppingMenu from "./NavMenu/ShoppingMenu";
+import LifeMenu from "./NavMenu/LifeMenu";
 import { NavContext } from "./NavProvider";
-import { Routes, Route } from "react-router-dom";
-import { Recommand, Channel } from "../pages";
+import { NavGroups } from "./NavState";
 
 const Navbar = () => {
-  const { currentNav } = useContext(NavContext);
+  const { tempNav } = useContext(NavContext); 
 
-  return (
-    <nav>
-      <CommuMenu />
-      {currentNav === "community" && (
-        <Routes>
-          <Route path="/topics/recommend" element={<Recommand />} />
-          <Route path="/topics/hashtag-channel" element={<Channel />} />
-        </Routes>
-      )}
-      {currentNav === "shopping" && <div>쇼핑 네비게이션</div>}
-      {currentNav === "life" && <div>인테리어/생활 네비게이션</div>}
-    </nav>
-  );
+  const renderMenu = () => {
+    if (NavGroups.COMMUNITY.includes(tempNav)) {
+      return <CommuMenu />;
+    } else if (NavGroups.SHOPPING.includes(tempNav)) {
+      return <ShoppingMenu />;
+    } else if (NavGroups.LIFE.includes(tempNav)) {
+      return <LifeMenu />;
+    } else {
+      return null;
+    }
   };
+
+  return <nav>{renderMenu()}</nav>;
+};
 
 export default Navbar;

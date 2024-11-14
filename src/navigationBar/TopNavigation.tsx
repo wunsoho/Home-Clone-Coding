@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { NavState } from './NavState';
+import { NavState, NavGroups } from './NavState';
 import { NavContext  } from './NavProvider';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Title, MenuBotton, SearchInput, 
@@ -12,7 +12,7 @@ import { pathToNavMap } from '../config';
 function TopNavigation() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { setNav, currentNav } = useContext(NavContext);
+    const { setNav, currentNav, setTempNav  } = useContext(NavContext);
     const [btnActive, setBtnActive] = useState<NavState>(currentNav);
 
     useEffect(() => {
@@ -28,19 +28,12 @@ function TopNavigation() {
     }
 
     const handleMouseEnter = (name: NavState) => {
-        setNav(name);
+        setTempNav(name); 
     }
 
     const handleMouseLeave = () => {
-        setNav(btnActive); 
+        setTempNav(btnActive); 
     }
-
-    const CommuSubMenu = [
-        NavState.COMMUNITY,
-        NavState.RECOMMAND,
-        NavState.CHANNEL,
-        // 추가적인 상태들을 이 배열에 포함
-    ];
 
     return (
         <div>
@@ -48,7 +41,7 @@ function TopNavigation() {
                 <img src={Logo} className="Home" alt="홈" onClick={() => { navigate('/'); }}></img>
                 <MenuContainer>
                     <MenuBotton
-                        isActive={CommuSubMenu.includes(btnActive)}
+                        isActive={NavGroups.COMMUNITY.includes(btnActive)}
                         onClick={() => {
                         toggleActive(NavState.COMMUNITY);
                         navigate('/');
@@ -59,7 +52,7 @@ function TopNavigation() {
                         커뮤니티
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.SHOPPING}
+                        isActive={NavGroups.SHOPPING.includes(btnActive)}
                         onClick={() => {
                         toggleActive(NavState.SHOPPING);
                         navigate('/shopping');
@@ -70,7 +63,7 @@ function TopNavigation() {
                         쇼핑
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.LIFE}
+                        isActive={NavGroups.LIFE.includes(btnActive)}
                         isLifeButton={true}
                         onClick={() => {
                         toggleActive(NavState.LIFE);
@@ -94,7 +87,7 @@ function TopNavigation() {
                     <img src={Down} className="Down" alt="글쓰기 아이콘" />
                 </WriteButton>
             </Title>
-
+            
         </div>
     )
 }
