@@ -41,7 +41,7 @@ function TopNavigation() {
                 <img src={Logo} className="Home" alt="홈" onClick={() => { navigate('/'); }}></img>
                 <MenuContainer>
                     <MenuBotton
-                        isActive={NavGroups.COMMUNITY.includes(btnActive)}
+                        $isActive={NavGroups.COMMUNITY.includes(btnActive)}
                         onClick={() => {
                         toggleActive(NavState.COMMUNITY);
                         navigate('/');
@@ -52,7 +52,7 @@ function TopNavigation() {
                         커뮤니티
                     </MenuBotton>
                     <MenuBotton
-                        isActive={NavGroups.SHOPPING.includes(btnActive)}
+                        $isActive={NavGroups.SHOPPING.includes(btnActive)}
                         onClick={() => {
                         toggleActive(NavState.SHOPPING);
                         navigate('/shopping');
@@ -63,8 +63,8 @@ function TopNavigation() {
                         쇼핑
                     </MenuBotton>
                     <MenuBotton
-                        isActive={NavGroups.LIFE.includes(btnActive)}
-                        isLifeButton={true}
+                        $isActive={NavGroups.LIFE.includes(btnActive)}
+                        $isLifeButton={true}
                         onClick={() => {
                         toggleActive(NavState.LIFE);
                         navigate('/life');

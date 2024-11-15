@@ -29,7 +29,7 @@ const ShoppingMenu = () => {
             <MenuContainer>
                 <ButtonConatiner>
                     <MenuBotton
-                        isActive={btnActive === NavState.SHOPPING}
+                        $isActive={btnActive === NavState.SHOPPING}
                         onClick={() => {
                         toggleActive(NavState.SHOPPING, '/shopping');
                         }}
@@ -37,7 +37,7 @@ const ShoppingMenu = () => {
                         쇼핑홈
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.CATEGORY}
+                        $isActive={btnActive === NavState.CATEGORY}
                         onClick={() => {
                         toggleActive(NavState.CATEGORY, '/category');
                         }}
@@ -45,7 +45,7 @@ const ShoppingMenu = () => {
                         카테고리
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.BEST}
+                        $isActive={btnActive === NavState.BEST}
                         onClick={() => {
                         toggleActive(NavState.BEST, '/best');
                         }}

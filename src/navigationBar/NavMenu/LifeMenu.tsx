@@ -29,7 +29,7 @@ const LifeMenu = () => {
             <MenuContainer>
                 <ButtonConatiner>
                     <MenuBotton
-                        isActive={btnActive === NavState.LIFE}
+                        $isActive={btnActive === NavState.LIFE}
                         onClick={() => {
                         toggleActive(NavState.SHOPPING, '/life');
                         }}
@@ -37,7 +37,7 @@ const LifeMenu = () => {
                         홈
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.CATEGORY}
+                        $isActive={btnActive === NavState.CATEGORY}
                         onClick={() => {
                         toggleActive(NavState.CATEGORY, '/dwelling');
                         }}
@@ -45,7 +45,7 @@ const LifeMenu = () => {
                         주거공간시공
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.BEST}
+                        $isActive={btnActive === NavState.BEST}
                         onClick={() => {
                         toggleActive(NavState.BEST, '/part');
                         }}

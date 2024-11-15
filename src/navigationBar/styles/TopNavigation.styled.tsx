@@ -3,8 +3,8 @@ import search from '../../img/search.png';
 import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    isActive: boolean;
-    isLifeButton?: boolean;
+    $isActive: boolean;
+    $isLifeButton?: boolean;
 }
 
 export const Title = styled.div`
@@ -32,17 +32,17 @@ export const MenuContainer = styled.div`
     margin-left : 2vw;
 `
 export const MenuBotton = styled.button<ButtonProps>`
-        width : ${(props: ButtonProps) => (props.isLifeButton ? "125px" : "74px")};
-        height : 20px;
-        color: ${(props: ButtonProps) => (props.isActive ? "#69E2FF" : "#000000")};
-        background-color : transparent;
-        border : none;
-        cursor : pointer;
-        font-family: 'MenuJW';
-        font-size : 1.1rem;
-        &:hover {
-        color: #69E2FF;
-    }
+    width: ${(props) => (props.$isLifeButton ? "125px" : "74px")};
+    height: 20px;
+    color: ${(props) => (props.$isActive ? "#69E2FF" : "#000000")};
+    background-color : transparent;
+    border : none;
+    cursor : pointer;
+    font-family: 'MenuJW';
+    font-size : 1.1rem;
+    &:hover {
+    color: #69E2FF;
+}
 `
 export const SearchInput = styled.input`
     margin-top : 0.3vh;

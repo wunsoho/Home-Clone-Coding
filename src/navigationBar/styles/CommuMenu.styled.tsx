@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    isActive: boolean;
-    isLifeButton?: boolean;
+    $isActive: boolean;
+    $isDropButton?: boolean;
 }
 export const DropdownContainer = styled.div`
-    margin-left : 45vw;
     position: absolute;
-    top: 100%; /* '취미' 버튼 바로 아래에 위치하도록 설정 */
-    left: 0;
+    top: 170%;
+    left: 40vw;  
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,7 +15,9 @@ export const DropdownContainer = styled.div`
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    width: max-content; /* 드롭다운 내용에 맞게 넓이 조절 */
+    width: 15vw; 
+    height : 11vh;
+    align-items: flex-start;
 `;
 
 export const MenuContainer = styled.div`
@@ -29,16 +30,17 @@ export const MenuContainer = styled.div`
 `;
 
 export const ButtonConatiner = styled.div`
-    margin-left: 20vw;
     position: relative;
+    display: flex;
 `;
 
 export const MenuBotton = styled.button<ButtonProps>`
-    position: relative;  // :before 위치를 조정할 수 있도록 relative 설정
+    position: relative;  
     min-width: 30px;
-    margin-left: 0.3vw;
+    margin-left: ${(props) => (props.$isDropButton ? '1vw' : '0.3vw')};  // isDropButton이 true일 때 왼쪽 마진 증가
+    margin-top: ${(props) => (props.$isDropButton ? '1vh' : '0')};  // isDropButton이 true일 때 위쪽 마진 증가
     height: 20px;
-    color: ${(props) => (props.isActive ? "#69E2FF" : "#000000")};
+    color: ${(props) => (props.$isActive ? "#69E2FF" : "#000000")};
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -53,11 +55,24 @@ export const MenuBotton = styled.button<ButtonProps>`
         left: 0;
         width: 100%; 
         height: 2px; 
-        background-color: ${(props) => (props.isActive ? "#69E2FF" : "transparent")};  
+        background-color: ${(props) => (props.$isActive && !props.$isDropButton ? "#69E2FF" : "transparent")};
         transition: background-color 0.3s ease;  
     }
 
     &:hover {
         color: #69E2FF;
     }
+`;
+
+
+export const GradientMenuBotton = styled(MenuBotton)`
+    background: linear-gradient(to right, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.6) 10%, 
+        rgba(0, 0, 0, 0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 `;

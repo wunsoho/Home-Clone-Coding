@@ -1,9 +1,10 @@
-import { MenuBotton, MenuContainer, ButtonConatiner, DropdownContainer } from '../styles/CommuMenu.styled';
-import { useState, useEffect, useContext } from 'react';
+import { MenuBotton, MenuContainer, ButtonConatiner, DropdownContainer, GradientMenuBotton } from '../styles/CommuMenu.styled';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { NavState } from '../NavState';
-import { NavContext  } from '../NavProvider';
+import { NavContext } from '../NavProvider';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { pathToNavMap } from '../../config';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const CommuMenu = () => {
 
@@ -11,13 +12,28 @@ const CommuMenu = () => {
     const location = useLocation();
     const { setNav, currentNav } = useContext(NavContext);
     const [btnActive, setBtnActive] = useState<NavState>(currentNav);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 드롭다운 상태 추가
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+    const dropdownRef = useRef<HTMLDivElement>(null);  
 
     useEffect(() => {
         const navState = pathToNavMap[location.pathname] || "community";
         setBtnActive(navState as NavState);
         setNav(navState as NavState);
     }, [location, setNav]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const toggleActive = (name: NavState, path: string) => {
         setBtnActive(name);
@@ -34,7 +50,7 @@ const CommuMenu = () => {
             <MenuContainer>
                 <ButtonConatiner>
                     <MenuBotton
-                        isActive={btnActive === NavState.COMMUNITY}
+                        $isActive={btnActive === NavState.COMMUNITY}
                         onClick={() => {
                         toggleActive(NavState.COMMUNITY, '/');
                         }}
@@ -42,7 +58,7 @@ const CommuMenu = () => {
                         홈
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.RECOMMAND}
+                        $isActive={btnActive === NavState.RECOMMAND}
                         onClick={() => {
                         toggleActive(NavState.RECOMMAND, '/topics/recommend');
                         }}
@@ -50,7 +66,7 @@ const CommuMenu = () => {
                         추천
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.CHANNEL}
+                        $isActive={btnActive === NavState.CHANNEL}
                         onClick={() => {
                         toggleActive(NavState.CHANNEL, '/topics/hashtag-channel');
                         }}
@@ -58,7 +74,7 @@ const CommuMenu = () => {
                         #채널
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.HOUSEWARMING}
+                        $isActive={btnActive === NavState.HOUSEWARMING}
                         onClick={() => {
                         toggleActive(NavState.HOUSEWARMING, '/housewarming');
                         }}
@@ -66,7 +82,7 @@ const CommuMenu = () => {
                         집들이
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.HOUSEPHOTO}
+                        $isActive={btnActive === NavState.HOUSEPHOTO}
                         onClick={() => {
                         toggleActive(NavState.HOUSEPHOTO, '/housephoto');
                         }}
@@ -74,7 +90,7 @@ const CommuMenu = () => {
                         집사진
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.THREED}
+                        $isActive={btnActive === NavState.THREED}
                         onClick={() => {
                         toggleActive(NavState.THREED, '/threeD');
                         }}
@@ -82,7 +98,7 @@ const CommuMenu = () => {
                         3D인테리어
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.STORAGE}
+                        $isActive={btnActive === NavState.STORAGE}
                         onClick={() => {
                         toggleActive(NavState.STORAGE, '/storage');
                         }}
@@ -90,7 +106,7 @@ const CommuMenu = () => {
                         살림수납
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.PET}
+                        $isActive={btnActive === NavState.PET}
                         onClick={() => {
                         toggleActive(NavState.PET, '/pet');
                         }}
@@ -98,7 +114,7 @@ const CommuMenu = () => {
                         반려동물
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.BABYCARE}
+                        $isActive={btnActive === NavState.BABYCARE}
                         onClick={() => {
                         toggleActive(NavState.BABYCARE, '/babycare');
                         }}
@@ -106,7 +122,7 @@ const CommuMenu = () => {
                         육아
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.HOMESTORANG}
+                        $isActive={btnActive === NavState.HOMESTORANG}
                         onClick={() => {
                         toggleActive(NavState.HOMESTORANG, '/homestorang');
                         }}
@@ -114,7 +130,7 @@ const CommuMenu = () => {
                         홈스토랑
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.PLAN}
+                        $isActive={btnActive === NavState.PLAN}
                         onClick={() => {
                         toggleActive(NavState.PLAN, '/plan');
                         }}
@@ -122,49 +138,56 @@ const CommuMenu = () => {
                         플랜테리어
                     </MenuBotton>
                     <MenuBotton
-                        isActive={btnActive === NavState.COLLECTABLE}
+                        $isActive={btnActive === NavState.COLLECTABLE}
                         onClick={() => {
                         toggleActive(NavState.COLLECTABLE, '/collectable');
                         }}
                     >
                         콜렉터블
                     </MenuBotton>
-                    
                     <MenuBotton
-                        isActive={btnActive === NavState.CAMPING}
+                        $isActive={btnActive === NavState.CAMPING}
                         onClick={() => {
                         toggleActive(NavState.CAMPING, '/camping');
+                        setIsDropdownOpen(false);
                         }}
                     >
                         캠핑
                     </MenuBotton>
-                    <MenuBotton
-                        isActive={btnActive === NavState.HOBBY}
-                        onClick={() => {
-                        toggleActive(NavState.HOBBY, '/hobby');
-                        }}
+                    <GradientMenuBotton
+                        $isActive={btnActive === NavState.HOBBY}
+                        onClick={() => handleDropdownToggle()}
                     >
                         취미
-                    </MenuBotton>
-                    <button onClick={handleDropdownToggle}>
-                        드다
-                    </button>
+                        {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+                    </GradientMenuBotton>
                     {isDropdownOpen && (
-                        <DropdownContainer>
+                        <DropdownContainer ref={dropdownRef}>
                             <MenuBotton
-                                isActive={btnActive === NavState.HOTPLACE}
+                                $isDropButton={true}
+                                $isActive={btnActive === NavState.HOBBY}
                                 onClick={() => {
-                                    toggleActive(NavState.HOTPLACE, '/hotplace');
-                                    setIsDropdownOpen(false);
+                                toggleActive(NavState.HOBBY, '/hobby');
+                                }}
+                                >
+                                취미
+                            </MenuBotton>
+                            <MenuBotton
+                                $isDropButton={true}
+                                $isActive={btnActive === NavState.HOTPLACE}
+                                onClick={() => {
+                                toggleActive(NavState.HOTPLACE, '/hotplace');
+                                setIsDropdownOpen(false);
                                 }}
                             >
                                 핫플레이스
                             </MenuBotton>
                             <MenuBotton
-                                isActive={btnActive === NavState.EVENT}
+                                $isDropButton={true}
+                                $isActive={btnActive === NavState.EVENT}
                                 onClick={() => {
-                                    toggleActive(NavState.EVENT, '/event');
-                                    setIsDropdownOpen(false);
+                                toggleActive(NavState.EVENT, '/event');
+                                setIsDropdownOpen(false);
                                 }}
                             >
                                 이벤트

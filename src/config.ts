@@ -24,3 +24,4 @@ export const pathToNavMap: Record<string, NavState> = {
     "/hotplace": NavState.HOTPLACE,
     "/event": NavState.EVENT
 }
+
